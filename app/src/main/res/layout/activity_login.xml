@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/brown"
-    tools:context=".Login">
+    tools:context=".Login"
+    >
 
     <Button
         android:id="@+id/button2"
@@ -20,6 +21,7 @@
         app:layout_constraintVertical_bias="0.613" />
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
@@ -31,6 +33,7 @@
         app:layout_constraintVertical_bias="0.355" />
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
@@ -47,7 +50,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

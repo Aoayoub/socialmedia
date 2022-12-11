@@ -1,4 +1,4 @@
-package com.example.bibliotheque;
+/*package com.example.bibliotheque;
 
 
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.bibliotheque.model.Books;
 
 import java.util.ArrayList;
 
@@ -36,4 +38,4 @@ public class BooksAdapter extends ArrayAdapter<Books> {
         txtdes.setText(getItem(position).get_Description());
         return convertView;
        }
-}
+}*/

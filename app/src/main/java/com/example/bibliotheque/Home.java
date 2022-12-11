@@ -11,15 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toolbar;
 
+//import com.example.bibliotheque.model.Books;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Home1 extends AppCompatActivity {
+public class Home extends AppCompatActivity {
     ListView listView;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -40,7 +39,7 @@ public class Home1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home1);
-        listView=findViewById(R.id.listView);
+        /*listView=findViewById(R.id.listView);
         ArrayList<Books> arrayList= new ArrayList<>();
         arrayList.add(new Books("Man's Search for Meaning",R.drawable.image, "A prominent Viennese psychiatrist before the war, Viktor Frankl was uniquely able to observe the way that both he and others in Auschwitz coped (or didnt) with the experience."));
         arrayList.add(new Books("Brave New World   Aldous Huxley",R.drawable.image1,"xxxxxxxxxxxx"));
@@ -54,7 +53,7 @@ public class Home1 extends AppCompatActivity {
         actionBarDrawerToggle =new ActionBarDrawerToggle(this,drawerLayout ,R.string.open_menu,R.string.close_menu);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
