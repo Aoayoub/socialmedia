@@ -50,10 +50,12 @@ EditText email,password,confirm_password;
                if(allemails.contains(user.getEmail()))
                    Toast.makeText(this,"this user already existed ",Toast.LENGTH_LONG).show();
                else {
+                   Toast.makeText(this, " succes ", Toast.LENGTH_SHORT).show();
                    DB.additem(user);
-                   Intent intent = new Intent(this, Home_app.class);
+
+                  /* Intent intent = new Intent(this, Home_app.class);
                    intent.putExtra("email_user", user.getEmail());
-                   startActivity(intent);
+                   startActivity(intent);*/
                }
             }
         };

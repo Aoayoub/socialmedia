@@ -1,12 +1,12 @@
-/*package com.example.bibliotheque.model;
+package com.example.bibliotheque.model;
 
 import android.graphics.Bitmap;
 
 public class Books {
     private int id_book;
     private String _Titre;
-    private Bitmap _image;
-    public Books(String Titre,Bitmap image,String Descrption)
+    private Byte[] _image;
+    public Books(String Titre,Byte []image,String Descrption)
     {
         this._Titre=Titre;
         this._image=image;
@@ -17,7 +17,7 @@ public class Books {
         return _Titre;
     }
 
-    public int get_image() {
+    public Byte[] get_image() {
         return _image;
     }
 
@@ -26,9 +26,8 @@ public class Books {
         this._Titre = _Titre;
     }
 
-    public void set_image(int _image) {
+    public void set_image(Byte[] _image) {
         this._image = _image;
     }
 
 }
-*/
