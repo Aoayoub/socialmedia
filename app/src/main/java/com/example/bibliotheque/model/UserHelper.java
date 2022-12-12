@@ -21,21 +21,21 @@ public class UserHelper extends SQLiteOpenHelper implements CrudDao<User> {
     public UserHelper(Context cntxt){
         super(cntxt,Db_Name,null,version);
     }
-    public void onCreate(@NonNull SQLiteDatabase db) {
+    public void onCreate( SQLiteDatabase db) {
         String CREATE_User = "CREATE TABLE " + Table_Name + "( "
                 + Id_user + " INTEGER PRIMARY KEY, " + email + "  varchar(60) UNIQUE NOT NULL,"
                 + password + " varchar(20)" + ")";
         db.execSQL(CREATE_User);
         db.close();
     }
-    public void onUpgrade(@NonNull SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + Table_Name);
 
         // Create tables again
         onCreate(db);
     }
-   public long additem(@NonNull User o){
+   public long additem( User o){
         SQLiteDatabase db=this.getWritableDatabase();
        ContentValues values=new ContentValues();
 
@@ -48,7 +48,7 @@ public class UserHelper extends SQLiteOpenHelper implements CrudDao<User> {
     }
 
     @Override
-    public void updateitem(@NonNull User obj) {
+    public void updateitem( User obj) {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
          values.put(password,obj.getPassword());
@@ -70,13 +70,14 @@ public class UserHelper extends SQLiteOpenHelper implements CrudDao<User> {
                 }while(iter.moveToNext());
             }
         }
-        db.close();
+        iter.close();
+       db.close();
 
         return list;
     }
 
     @Override
-    public User getitem(@NonNull User obj){
+    public User getitem( User obj){
        String email_t=obj.getEmail();
        String password_t=obj.getPassword();
        SQLiteDatabase db=this.getReadableDatabase();
@@ -89,13 +90,13 @@ public class UserHelper extends SQLiteOpenHelper implements CrudDao<User> {
                         return user;
             }
 
-
+            iter.close();
            db.close();
             return null;
     }
 
     @Override
-    public void delete(@NonNull User obj) {
+    public void delete( User obj) {
         //for admin
         SQLiteDatabase db=this.getReadableDatabase();
         db.delete(Table_Name,"email = ?",new String[]{obj.getEmail()});
@@ -113,7 +114,9 @@ public class UserHelper extends SQLiteOpenHelper implements CrudDao<User> {
                 }while(iter.moveToNext());
             }
         }
+        iter.close();
         db.close();
+
         return emails;
     }
 }

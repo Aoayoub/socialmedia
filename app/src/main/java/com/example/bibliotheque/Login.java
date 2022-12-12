@@ -11,13 +11,14 @@ import android.widget.Toast;
 
 import com.example.bibliotheque.model.User;
 import com.example.bibliotheque.model.UserHelper;
+import com.example.bibliotheque.model2.DatabaseHelper;
 
 import java.util.Locale;
 
 public class Login extends AppCompatActivity {
 Button button_Login;
 EditText email,password;
-UserHelper db;
+DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,7 @@ UserHelper db;
         email=findViewById(R.id.eml_em);
         password=findViewById(R.id.psw);
         button_Login=findViewById(R.id.button2);
-        db=new UserHelper(this);
+        db=new DatabaseHelper(this);
 
         View.OnClickListener exp=v->{
             if(isoneofthefieldsempty())
@@ -38,8 +39,9 @@ UserHelper db;
                 {
                     //home
                     Toast.makeText(this,"succes",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(this,home.class));
 
-                    startActivity(new Intent(this,Home_app.class));
+                    //startActivity(new Intent(this,Home.class));
                     finish();
                     //Toast.makeText(this,"succes",Toast.LENGTH_LONG).show();
                 }
@@ -58,7 +60,7 @@ UserHelper db;
     public boolean checkuser(String email,String password){
 
 
-        return db.getitem(new User(email, password)) != null;
+        return db.checkUser(email,password);
     }
    /* public boolean checkuser(User user){
         UserHelper db=new UserHelper(getApplicationContext());

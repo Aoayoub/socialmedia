@@ -3,6 +3,7 @@ package com.example.bibliotheque;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabaseLockedException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,20 +11,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bibliotheque.model.User;
+//import com.example.bibliotheque.model.User;
 import com.example.bibliotheque.model.UserHelper;
+import com.example.bibliotheque.model2.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+import com.example.bibliotheque.model2.User;
 
 public class MainActivity extends AppCompatActivity {
 TextView Sign_up;
 EditText email,password,confirm_password;
  Button button_register;
  TextView rediraction;
- UserHelper DB;
+ //UserHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,8 @@ EditText email,password,confirm_password;
         confirm_password=findViewById(R.id.c_pass);
         rediraction=findViewById(R.id.signup);
 
-        DB=new UserHelper(this);
+        //DB=new UserHelper(this);
+        DatabaseHelper db=new DatabaseHelper(this);
         View.OnClickListener expres=(v)->{
             if(isoneofthefieldsempty())
                 Toast.makeText(this,"missing information",Toast.LENGTH_LONG).show();
@@ -43,20 +47,21 @@ EditText email,password,confirm_password;
                 Toast.makeText(this,"incorrect email",Toast.LENGTH_LONG).show();
             else if(!is_confirm_password_correct())
                 Toast.makeText(this,"Incorrect Password",Toast.LENGTH_LONG).show();
-            else{
-                User user=new User(email.getText().toString().toLowerCase(Locale.ROOT),password.getText().toString());
-               List<String> allemails=DB.getAllemails();
-               //check if email already in database
-               if(allemails.contains(user.getEmail()))
-                   Toast.makeText(this,"this user already existed ",Toast.LENGTH_LONG).show();
-               else {
-                   Toast.makeText(this, " succes ", Toast.LENGTH_SHORT).show();
-                   DB.additem(user);
+            else {
 
-                  /* Intent intent = new Intent(this, Home_app.class);
-                   intent.putExtra("email_user", user.getEmail());
-                   startActivity(intent);*/
-               }
+                User user = new User();
+                user.setEmail(email.getText().toString().toLowerCase(Locale.ROOT));
+                user.setPassword(password.getText().toString());
+                if (db.checkUser(user.getEmail()))
+                    Toast.makeText(this, "this user already exist", Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(this, "succes", Toast.LENGTH_LONG).show();
+
+                    db.addUser(user);
+                    Intent intent = new Intent(this, home.class);
+                    intent.putExtra("email", user.getEmail());
+                    startActivity(intent);
+                }
             }
         };
         button_register.setOnClickListener(expres);
