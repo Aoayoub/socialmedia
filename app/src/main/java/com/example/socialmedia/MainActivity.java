@@ -1,9 +1,9 @@
-package com.example.bibliotheque;
+package com.example.socialmedia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabaseLockedException;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,14 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.example.bibliotheque.model.User;
-import com.example.bibliotheque.model.UserHelper;
-import com.example.bibliotheque.model2.*;
+import com.example.socialmedia.model2.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
-import com.example.bibliotheque.model2.User;
+import com.example.socialmedia.model2.User;
 
 public class MainActivity extends AppCompatActivity {
 TextView Sign_up;
@@ -31,12 +29,12 @@ EditText email,password,confirm_password;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Sign_up= findViewById(R.id.signup);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
+
         button_register=findViewById(R.id.register);
         email=findViewById(R.id.emailregister);
         password=findViewById(R.id.password_register);
         confirm_password=findViewById(R.id.c_pass);
-        rediraction=findViewById(R.id.signup);
 
         //DB=new UserHelper(this);
         DatabaseHelper db=new DatabaseHelper(this);
@@ -58,14 +56,13 @@ EditText email,password,confirm_password;
                     Toast.makeText(this, "succes", Toast.LENGTH_LONG).show();
 
                     db.addUser(user);
-                    Intent intent = new Intent(this, home.class);
+                    Intent intent = new Intent(this, Login.class);
                     intent.putExtra("email", user.getEmail());
                     startActivity(intent);
                 }
             }
         };
         button_register.setOnClickListener(expres);
-        rediraction.setOnClickListener(v->{ Intent signup=new Intent(this,Login.class);startActivity(signup);});
 
     }
     public boolean isoneofthefieldsempty(){

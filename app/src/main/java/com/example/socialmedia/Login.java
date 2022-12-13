@@ -1,22 +1,24 @@
-package com.example.bibliotheque;
+package com.example.socialmedia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bibliotheque.model.User;
-import com.example.bibliotheque.model.UserHelper;
-import com.example.bibliotheque.model2.DatabaseHelper;
+import com.example.socialmedia.model2.DatabaseHelper;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 Button button_Login;
+TextView Add_Account;
 EditText email,password;
 DatabaseHelper db;
     @Override
@@ -26,7 +28,9 @@ DatabaseHelper db;
         email=findViewById(R.id.eml_em);
         password=findViewById(R.id.psw);
         button_Login=findViewById(R.id.button2);
+        Add_Account = findViewById(R.id.Createacc);
         db=new DatabaseHelper(this);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
 
         View.OnClickListener exp=v->{
             if(isoneofthefieldsempty())
@@ -52,7 +56,7 @@ DatabaseHelper db;
 
         };
       button_Login.setOnClickListener(exp);
-
+        Add_Account.setOnClickListener(v -> {Intent intent =new Intent(this,MainActivity.class);startActivity(intent);});
     }
     public boolean isoneofthefieldsempty(){
         return email.getText().toString().trim().isEmpty() || password.getText().toString().isEmpty();

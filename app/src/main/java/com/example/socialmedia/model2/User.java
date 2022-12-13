@@ -1,4 +1,4 @@
-package com.example.bibliotheque.model2;
+package com.example.socialmedia.model2;
 
 public class User {
     public int getId() {

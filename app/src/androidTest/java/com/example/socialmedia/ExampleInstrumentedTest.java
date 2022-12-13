@@ -1,4 +1,4 @@
-package com.example.bibliotheque;
+package com.example.socialmedia;
 
 import android.content.Context;
 

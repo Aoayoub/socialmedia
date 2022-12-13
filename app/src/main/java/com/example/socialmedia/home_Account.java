@@ -1,14 +1,14 @@
-package com.example.bibliotheque;
+package com.example.socialmedia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class home extends AppCompatActivity {
+public class home_Account extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.activity_home_account);
     }
 }

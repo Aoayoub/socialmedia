@@ -1,4 +1,4 @@
-package com.example.bibliotheque.model2;
+package com.example.socialmedia.model2;
 
 import android.content.ContentValues;
 import android.content.Context;
