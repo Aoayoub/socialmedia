@@ -56,7 +56,7 @@ EditText email,password,confirm_password;
                     Toast.makeText(this, "succes", Toast.LENGTH_LONG).show();
 
                     db.addUser(user);
-                    Intent intent = new Intent(this, Login.class);
+                    Intent intent = new Intent(this, home.class);
                     intent.putExtra("email", user.getEmail());
                     startActivity(intent);
                 }

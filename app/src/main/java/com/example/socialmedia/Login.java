@@ -43,7 +43,9 @@ DatabaseHelper db;
                 {
                     //home
                     Toast.makeText(this,"succes",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(this,home.class));
+                    Intent gothome=new Intent(this,home.class);
+                    gothome.putExtra("email",mail);
+                    startActivity(gothome);
 
                     //startActivity(new Intent(this,Home.class));
                     finish();

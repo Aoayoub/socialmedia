@@ -9,17 +9,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import com.example.socialmedia.model2.DatabaseHelper;
+import com.example.socialmedia.model2.Post;
+
+import java.util.List;
 import java.util.Objects;
-import java.util.zip.Inflater;
 
 public class home extends AppCompatActivity {
+     String email_previous;
+     DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home1);
+        setContentView(R.layout.home);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
+        email_previous=getIntent().getStringExtra("email");
+        db=new DatabaseHelper(this);
+        List<Post> posts=db.getallposts();
+        PostProfileAdapter adapter=new PostProfileAdapter(this,R.layout.post_home,posts);
+        ListView listView=findViewById(R.id.home_listview);
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -31,18 +43,23 @@ public class home extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        email_previous=getIntent().getStringExtra("email");
         switch(item.getItemId())
         {
             case R.id.home1:
-                Intent intent = new Intent(this,home.class);
+                Intent intent = new Intent(this,Profile.class);
+                intent.putExtra("emailhome",email_previous);
+
                 startActivity(intent);
                 return true;
             case R.id.plus:
                 Intent intent1=new Intent(this,AddPost.class);
+                intent1.putExtra("emailhome",email_previous);
                 startActivity(intent1);
                 return true;
             case R.id.logout:
                 Intent intent2= new Intent(this,Login.class);
+                intent2.putExtra("emailhome",email_previous);
                 startActivity(intent2);
 
                 return true;

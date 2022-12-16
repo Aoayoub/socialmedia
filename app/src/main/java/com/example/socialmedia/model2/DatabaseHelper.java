@@ -7,13 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "libray_project.db";
@@ -26,13 +27,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_USER_PASSWORD = "user_password";
+    //for posts
+    private final static String POST_USER="post";
+    private final static  String ID_POST="id_post";
+    private final static String EMAIL_POST="email_user";
+    private final static String DESCRIPTION="description";
+    private final static String IMAGE="image";
+
 
     // create table sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_EMAIL + " TEXT UNIQUE," + COLUMN_USER_PASSWORD + " TEXT" + ")";
-
-    // drop table sql query
+    private String CREATE_POST_TABLE=" CREATE TABLE "+POST_USER+"("+ID_POST+" INTEGER PRIMARY KEY AUTOINCREMENT, "+EMAIL_POST+" TEXT, "+DESCRIPTION+" TEXT,"+IMAGE+" BLOB );";
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+    private String DROP_POST_TABLE="DROP TABLE IF EXISTS "+POST_USER;
 
     /**
      * Constructor
@@ -46,6 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_POST_TABLE);
     }
 
 
@@ -54,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Drop User Table if exist
         db.execSQL(DROP_USER_TABLE);
-
+        db.execSQL(DROP_POST_TABLE);
         // Create tables again
         onCreate(db);
 
@@ -235,6 +244,61 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return cursorCount>0;
+
+    }
+    public void addPost(Post post){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(EMAIL_POST,post.getEmail_user());
+        values.put(DESCRIPTION,post.getDescription());
+        values.put(IMAGE,post.getImage());
+        db.insert(POST_USER,null,values);
+        db.close();
+
+    }
+    public List<Post> getallposts(){
+        SQLiteDatabase db=this.getReadableDatabase();
+        List<Post> posts=new ArrayList<>();
+        Post post=new Post();
+        Cursor cursor=db.rawQuery("SELECT * FROM "+ POST_USER+" ORDER BY "+ID_POST+" DESC",null);
+        if(cursor != null){
+            if(cursor.moveToFirst()){
+                do {
+                    post.setEmail_user(cursor.getString(cursor.getColumnIndexOrThrow(EMAIL_POST)));
+                    post.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
+                    post.setImage(cursor.getBlob(cursor.getColumnIndexOrThrow(IMAGE)));
+                    posts.add(post);
+                }while(cursor.moveToNext());
+
+            }
+
+        }
+        db.close();
+        return posts;
+    }
+    public List<Post> getallposts(String email){
+        List <Post> posts=new ArrayList<>();
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor cursor=db.query(POST_USER,null,"email = ?",new String[]{email},null,null,ID_POST+" DESC");
+        if(cursor!=null){
+            if(cursor.moveToFirst()){
+                do{
+                    String mail=cursor.getString(cursor.getColumnIndexOrThrow(EMAIL_POST));
+                    byte[] image= cursor.getBlob(cursor.getColumnIndexOrThrow(IMAGE));
+                    String Desc=cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION));
+                    posts.add(new Post(mail,image,Desc));
+                }while(cursor.moveToNext());
+            }
+        }
+        db.close();
+
+        return posts;
+    }
+
+    public void delete(Integer id){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(POST_USER,ID_POST+" = ?",new String[]{id.toString()});
+        db.close();
 
     }
 }
