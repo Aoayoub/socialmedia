@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="409dp"
-        android:layout_height="164dp"
+        android:layout_width="407dp"
+        android:layout_height="189dp"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="1dp">
 
         <ImageView
             android:id="@+id/pic_profile"
@@ -19,17 +19,11 @@
 
         <TextView
             android:id="@+id/desc_profile"
-            android:layout_width="249dp"
-            android:layout_height="119dp"
-            android:layout_marginLeft="150dp"
+            android:layout_width="233dp"
+            android:layout_height="99dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="10dp"
             android:text="TextView" />
 
-        <ImageView
-            android:id="@+id/delete_post"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="350dp"
-            android:layout_marginTop="140dp"
-            app:srcCompat="@drawable/remove_button" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

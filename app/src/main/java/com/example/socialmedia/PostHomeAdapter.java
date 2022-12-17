@@ -21,14 +21,12 @@ public class PostHomeAdapter extends ArrayAdapter<Post> {
     private List<Post> posts=new ArrayList<>();
 
 
-    PostHomeAdapter(@NonNull Context context,int ressource,List<Post> posts){
+    PostHomeAdapter(Context context,int ressource,List<Post> posts){
         super(context,ressource,posts);
 
     }
-    @NonNull
-    @Override
-    public View getView(int position, View convertview,@NonNull ViewGroup parent){
-        DatabaseHelper db=new DatabaseHelper(getContext());
+    public View getView(int position, View convertview,ViewGroup parent){
+
         View item = convertview;
             item = LayoutInflater.from(getContext()).inflate(R.layout.post_home, parent, false);
         Post post=getItem(position);

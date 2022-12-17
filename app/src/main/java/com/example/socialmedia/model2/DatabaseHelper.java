@@ -285,10 +285,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(cursor!=null){
             if(cursor.moveToFirst()){
                 do{
+                    Integer id= cursor.getInt(cursor.getColumnIndexOrThrow(ID_POST));
                     String mail=cursor.getString(cursor.getColumnIndexOrThrow(EMAIL_POST));
                     byte[] image= cursor.getBlob(cursor.getColumnIndexOrThrow(IMAGE));
                     String Desc=cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION));
-                    posts.add(new Post(mail,image,Desc));
+                    posts.add(new Post(id,mail,image,Desc));
                 }while(cursor.moveToNext());
             }
         }
@@ -300,7 +301,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void delete(Integer id){
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(POST_USER,ID_POST+" = ?",new String[]{id.toString()});
+        db.delete(POST_USER,ID_POST+" = ?",new String[]{String.valueOf(id)});
         db.close();
 
     }

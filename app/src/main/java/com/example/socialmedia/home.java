@@ -22,7 +22,7 @@ public class home extends AppCompatActivity {
      String email_previous;
      DatabaseHelper db;
      List<Post> posts;
-     PostHomeAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +31,14 @@ public class home extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
         email_previous=getIntent().getStringExtra("email");
         db=new DatabaseHelper(this);
-         posts=db.getallposts();
+         posts=db.getallposts(email_previous);
         Integer sz=posts.size();
         String size =sz.toString();
         Toast.makeText(this, size, Toast.LENGTH_SHORT).show();
-        adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
+        PostHomeAdapter   adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
         ListView listView=findViewById(R.id.home_listview);
         listView.setAdapter(adapter);
+
     }
 
     @Override
@@ -57,18 +58,23 @@ public class home extends AppCompatActivity {
                 intent.putExtra("emailhome",email_previous);
 
                 startActivity(intent);
+
                 return true;
             case R.id.plus:
                 Intent intent1=new Intent(this,AddPost.class);
                 intent1.putExtra("emailhome",email_previous);
                 startActivity(intent1);
-
                 return true;
             case R.id.logout:
                 Intent intent2= new Intent(this,Login.class);
                 startActivity(intent2);
 
                 return true;
+            case R.id.refresh:
+                finish();
+                startActivity(getIntent());
+                return true;
+
             default:return super.onOptionsItemSelected(item);
         }
 

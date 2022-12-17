@@ -29,7 +29,7 @@ public class Profile extends AppCompatActivity {
         ListView listView=findViewById(R.id.list_profil);
 
         listView.setAdapter(adapter);
-        finish();
+        
 
 
     }
