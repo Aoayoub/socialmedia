@@ -14,10 +14,10 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "libray_project.db";
+    private static final String DATABASE_NAME = "socialmedia.db";
 
     // User table name
     private static final String TABLE_USER = "user";
@@ -276,10 +276,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return posts;
     }
+
     public List<Post> getallposts(String email){
         List <Post> posts=new ArrayList<>();
-        SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.query(POST_USER,null,"email = ?",new String[]{email},null,null,ID_POST+" DESC");
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(POST_USER,null,EMAIL_POST+" = ?",new String[]{email},null,null,ID_POST+" DESC");
+
         if(cursor!=null){
             if(cursor.moveToFirst()){
                 do{
@@ -294,6 +296,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return posts;
     }
+
 
     public void delete(Integer id){
         SQLiteDatabase db=this.getWritableDatabase();

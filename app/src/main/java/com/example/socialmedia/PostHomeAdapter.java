@@ -22,6 +22,7 @@ public class PostHomeAdapter extends ArrayAdapter<Post> {
         super(context,ressource,posts);
 
     }
+
     @Override
     public View getView(int position, View convertview, ViewGroup parent){
         Post post=posts.get(position);

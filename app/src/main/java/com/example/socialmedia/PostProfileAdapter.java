@@ -31,8 +31,7 @@ public class PostProfileAdapter extends ArrayAdapter<Post> {
         DatabaseHelper db=new DatabaseHelper(context);
 
             Post post = posts.get(position);
-        View item = LayoutInflater.from(context).inflate(ressource, parent, false);
-
+        View item ;
         item = LayoutInflater.from(context).inflate(ressource, parent, false);
             ImageView post_pic = item.findViewById(R.id.pic_profile);
             TextView description = item.findViewById(R.id.desc_profile);
