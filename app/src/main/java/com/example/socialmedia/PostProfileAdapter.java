@@ -28,11 +28,11 @@ public class PostProfileAdapter extends ArrayAdapter<Post> {
 
     public View getView(int position, View view, ViewGroup parent){
 
-        DatabaseHelper db=new DatabaseHelper(context);
+        DatabaseHelper db=new DatabaseHelper(getContext());
 
-            Post post = posts.get(position);
-        View item ;
-        item = LayoutInflater.from(context).inflate(ressource, parent, false);
+            Post post =getItem(position);
+        View item = view;
+        item = LayoutInflater.from(getContext()).inflate(R.layout.post_profile, parent, false);
             ImageView post_pic = item.findViewById(R.id.pic_profile);
             TextView description = item.findViewById(R.id.desc_profile);
             ImageView delete = item.findViewById(R.id.delete_post);

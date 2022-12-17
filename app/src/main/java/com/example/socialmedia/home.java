@@ -35,9 +35,9 @@ public class home extends AppCompatActivity {
         Integer sz=posts.size();
         String size =sz.toString();
         Toast.makeText(this, size, Toast.LENGTH_SHORT).show();
-     /*adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
+        adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
         ListView listView=findViewById(R.id.home_listview);
-        listView.setAdapter(adapter);*/
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -62,6 +62,7 @@ public class home extends AppCompatActivity {
                 Intent intent1=new Intent(this,AddPost.class);
                 intent1.putExtra("emailhome",email_previous);
                 startActivity(intent1);
+
                 return true;
             case R.id.logout:
                 Intent intent2= new Intent(this,Login.class);

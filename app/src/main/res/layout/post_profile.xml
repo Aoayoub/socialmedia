@@ -5,32 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/pic_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+    <RelativeLayout
+        android:layout_width="409dp"
+        android:layout_height="164dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <TextView
-        android:id="@+id/desc_profile"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/pic_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <ImageView
-        android:id="@+id/delete_post"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="38dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pic_profile"
-        app:srcCompat="@drawable/remove_button" />
+        <TextView
+            android:id="@+id/desc_profile"
+            android:layout_width="249dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="150dp"
+            android:text="TextView" />
+
+        <ImageView
+            android:id="@+id/delete_post"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="140dp"
+            app:srcCompat="@drawable/remove_button" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

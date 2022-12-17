@@ -25,10 +25,11 @@ public class Profile extends AppCompatActivity {
        Integer size= posts.size();
         Toast.makeText(this, size.toString(), Toast.LENGTH_SHORT).show();
 
-       /*  PostHomeAdapter adapter=new PostHomeAdapter(this,R.layout.post_profile,posts);
+        PostProfileAdapter adapter=new PostProfileAdapter(this,R.layout.post_profile,posts);
         ListView listView=findViewById(R.id.list_profil);
 
-        listView.setAdapter(adapter);*/
+        listView.setAdapter(adapter);
+        finish();
 
 
     }
