@@ -21,7 +21,7 @@ public class Profile extends AppCompatActivity {
          email=getIntent().getStringExtra("emailhome");
 
         DatabaseHelper db=new DatabaseHelper(this);
-        posts=db.getallposts();
+        posts=db.getallposts(email);
 
 
         PostProfileAdapter adapter=new PostProfileAdapter(this,R.layout.post_profile,posts);
