@@ -264,10 +264,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(cursor != null){
             if(cursor.moveToFirst()){
                 do {
-                    post.setEmail_user(cursor.getString(cursor.getColumnIndexOrThrow(EMAIL_POST)));
-                    post.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
-                    post.setImage(cursor.getBlob(cursor.getColumnIndexOrThrow(IMAGE)));
-                    posts.add(post);
+                    String email_p=cursor.getString(cursor.getColumnIndexOrThrow(EMAIL_POST));
+                    byte[] image=cursor.getBlob(cursor.getColumnIndexOrThrow(IMAGE));
+                    String desc_p=cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION));
+                    posts.add(new Post(email_p,image,desc_p));
                 }while(cursor.moveToNext());
 
             }
@@ -280,8 +280,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Post> getallposts(String email){
         List <Post> posts=new ArrayList<>();
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(POST_USER,null,EMAIL_POST+" = ?",new String[]{email},null,null,ID_POST+" DESC");
-
+        //Cursor cursor=db.query(POST_USER,null,EMAIL_POST+" = ?",new String[]{email},null,null,ID_POST+" DESC");
+        Cursor cursor=db.rawQuery(String.format("select * from %s where %s=\"%s\" order by %s desc;",POST_USER,EMAIL_POST,email,ID_POST),null);
         if(cursor!=null){
             if(cursor.moveToFirst()){
                 do{
@@ -297,7 +297,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return posts;
     }
-
 
     public void delete(Integer id){
         SQLiteDatabase db=this.getWritableDatabase();

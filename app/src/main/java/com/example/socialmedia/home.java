@@ -31,10 +31,7 @@ public class home extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
         email_previous=getIntent().getStringExtra("email");
         db=new DatabaseHelper(this);
-         posts=db.getallposts(email_previous);
-        Integer sz=posts.size();
-        String size =sz.toString();
-        Toast.makeText(this, size, Toast.LENGTH_SHORT).show();
+         posts=db.getallposts();
         PostHomeAdapter   adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
         ListView listView=findViewById(R.id.home_listview);
         listView.setAdapter(adapter);

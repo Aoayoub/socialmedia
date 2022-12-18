@@ -21,7 +21,7 @@ public class Profile extends AppCompatActivity {
          email=getIntent().getStringExtra("emailhome");
         Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
         DatabaseHelper db=new DatabaseHelper(this);
-        posts=db.getallposts(email);
+        posts=db.getallposts();
        Integer size= posts.size();
         Toast.makeText(this, size.toString(), Toast.LENGTH_SHORT).show();
 
