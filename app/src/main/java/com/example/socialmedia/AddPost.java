@@ -59,8 +59,6 @@ DatabaseHelper db;
         setContentView(R.layout.activity_add_post);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
         email_user=getIntent().getStringExtra("emailhome");
-        if(email_user != null)
-            Toast.makeText(this,"not null",Toast.LENGTH_LONG).show();
         db=new DatabaseHelper(this);
         add_photo=findViewById(R.id.Add_image);
         add_data=findViewById(R.id.Add);

@@ -19,17 +19,16 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_home);
          email=getIntent().getStringExtra("emailhome");
-        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
+
         DatabaseHelper db=new DatabaseHelper(this);
         posts=db.getallposts();
-       Integer size= posts.size();
-        Toast.makeText(this, size.toString(), Toast.LENGTH_SHORT).show();
+
 
         PostProfileAdapter adapter=new PostProfileAdapter(this,R.layout.post_profile,posts);
         ListView listView=findViewById(R.id.list_profil);
 
         listView.setAdapter(adapter);
-        
+
 
 
     }
